@@ -24,5 +24,5 @@ RUN npm install
 # Bundle app source
 # COPY . .
 
-CMD [ "npm", "run", "build" ]
+CMD [ "npm", "start" ]
 ## CMD [ "/bin/sh" ]
