@@ -2,6 +2,11 @@ const path = require('path');
 
 module.exports = {
   entry: './src/app.js',
+  mode: 'production',
+  performance: {
+    maxEntrypointSize: 400000,
+    maxAssetSize: 400000
+  },
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist')
