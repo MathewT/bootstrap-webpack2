@@ -1,4 +1,9 @@
-const path = require('path');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var package     = require('./package.json');
+var CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
+var path = require("path");
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './src/app.js',
@@ -56,5 +61,33 @@ module.exports = {
           }]
       }
     ]
-  }
+  },
+  plugins: [
+    new ExtractTextPlugin({ filename: 'app.bundle.css' }),
+    new CommonsChunkPlugin({
+        name: 'shared',
+        minChunks: 2
+    }),
+    new HtmlWebpackPlugin({
+        hash: true,
+        title: 'My Awesome application',
+        myPageHeader: 'Hello World',
+        template: './src/index.html',
+        chunks: ['vendor', 'shared', 'app'],
+        path: path.join(__dirname, "../dist/"),
+        filename: 'index.html' 
+    }),
+    new HtmlWebpackPlugin({
+        hash: true,
+        title: 'My Awesome application',
+        myPageHeader: 'Settings',
+        template: './src/index.html',
+        chunks: ['vendor', 'shared', 'settings'],
+        path: path.join(__dirname, "../dist/"),
+        filename: 'settings.html'
+    }),
+    new CopyWebpackPlugin([   
+        {from: 'src/images', to: 'images'}   
+    ]),
+  ]
 };

@@ -17,12 +17,13 @@ COPY package*.json ./
 
 # COPY src/ ./
 
-RUN npm install
+# RUN npm install
 # If you are building your code for production
 # RUN npm install --only=production
 
 # Bundle app source
 # COPY . .
 
-CMD [ "npm", "start" ]
+CMD ["./start.sh"]
+## CMD [ "npm", "start" ]
 ## CMD [ "/bin/sh" ]
